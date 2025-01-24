@@ -3,7 +3,7 @@ name: New Knowledge Graph Registry Submission
 about: This is a templete to request adding information about a new knowldedge graph
   to the registry
 title: Add new record to the KGI registry
-labels: ''
+labels: Add new
 assignees: elhossary
 
 ---
