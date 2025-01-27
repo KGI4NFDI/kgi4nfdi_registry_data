@@ -6,7 +6,7 @@ labels: Add new
 assignees: elhossary
 
 ---
-
+```
 title: # Short text
 description:  # long text
 nfdi_consortia: # list of wikidata items ID that start with Q
@@ -33,3 +33,4 @@ urls: # strings containing URLs
   - # https:example.com
   data_dumps: 
   - # https:example.com
+```
