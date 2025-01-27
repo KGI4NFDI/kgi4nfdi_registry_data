@@ -1,12 +1,12 @@
 ---
-name: New Knowledge Graph Registry Submission
-about: This is a templete to request adding information about a new knowldedge graph
-  to the registry
-title: Add new record to the KGI registry
+name: Register new Knowldge Graph at KGI4NFDI
+about: Here you can request to register a new Knowldge Graph at KGI registry
+title: ''
 labels: Add new
 assignees: elhossary
 
 ---
+
 ```
 title: # Short text
 description:  # long text
