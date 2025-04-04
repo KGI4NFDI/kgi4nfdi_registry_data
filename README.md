@@ -4,7 +4,7 @@ The KGI Registry Data repository is the dedicated space for collecting, structur
 ## Contributing to the Registry
  The contribution workflow is as follows:
  
-1) A representative of an NFDI consortium or research project fills out our issue template [https://github.com/KGI4NFDI/kgi4nfdi_registry_data/issues/new?template=data-contribution.md] and submits a new issue.
+1) A representative of an NFDI consortium or research project fills out our [issue template](https://github.com/KGI4NFDI/kgi4nfdi_registry_data/issues/new?template=data-contribution.md) and submits a new issue.
 2) The metadata submitted via the issue is transferred into a structured data format (.yaml), checked and validated before ingestion into the Registry triplestore.
 3) If any data fails the validation process, the KGI admin team are notified and they can follow up with the contact person who submitted the issue for clarification and/or correction.
 4) Once, all the metadata passes validation, it is ingested into the Registry and can be queried via the public SPARQL endpoint.
