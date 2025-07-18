@@ -3,8 +3,8 @@ name: Data contribution
 about: This issue template collects metadata required for contributions to the KGI
   registry.
 title: "[KGI registry entry]"
-labels: New registry entry
-assignees: elhossary
+labels: New registry entry, to review
+assignees: elhossary, lozanaross
 
 ---
 
