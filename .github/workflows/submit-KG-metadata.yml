@@ -6,10 +6,14 @@ on:
 
 jobs:
   run-python-script:
-    if: github.event.label.name == 'approved'
+    # Works if 'approved' label is present in the issue labels
+    if: contains(github.event.issue.labels.*.name, 'approved')
     runs-on: [self-hosted, juist-hosted]
 
     steps:
+      - name: Dump event context
+        run: echo "${{ toJson(github.event) }}"
+
       - name: Checkout repo
         uses: actions/checkout@v4
 
@@ -19,6 +23,6 @@ jobs:
           python-version: '3.11'
 
       - name: Run your Python script
-        run: |
-          echo "Works"
+        run: echo "Works"
+
 
