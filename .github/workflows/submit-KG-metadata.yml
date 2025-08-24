@@ -6,13 +6,16 @@ on:
 
 jobs:
   run-python-script:
-    # Works if 'approved' label is present in the issue labels
-    if: contains(github.event.issue.labels.*.name, 'approved')
+    # only when the *added* label is exactly "approved"
+    if: ${{ github.event.action == 'labeled' && github.event.label.name == 'approved' }}
     runs-on: [self-hosted, juist-hosted]
 
     steps:
-      - name: Dump event context
-        run: echo "${{ toJson(github.event) }}"
+      - name: Debug event
+        run: |
+          echo "action=${{ github.event.action }}"
+          echo "added_label=${{ github.event.label.name }}"
+          echo 'all_labels=${{ toJson(github.event.issue.labels.*.name) }}'
 
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -24,5 +27,3 @@ jobs:
 
       - name: Run your Python script
         run: echo "Works"
-
-
