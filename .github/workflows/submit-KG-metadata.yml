@@ -1,0 +1,23 @@
+name: Run Python Script on Issue Approved
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  run-python-script:
+    if: github.event.label.name == 'approved'
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'  # Set to your required version
+
+      - name: Run your Python script
+        run: |
+          echo "Works"
