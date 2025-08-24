@@ -7,7 +7,7 @@ on:
 jobs:
   run-python-script:
     # only when the *added* label is exactly "approved"
-    if: ${{ github.event.action == 'labeled' && github.event.label.name == 'approved' }}
+    if: ${{ github.event.label.name == 'approved' || github.event.label.name == 'Approved' }}
     runs-on: [self-hosted, juist-hosted]
 
     steps:
