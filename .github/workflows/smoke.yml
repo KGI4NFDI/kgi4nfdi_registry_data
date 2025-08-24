@@ -1,0 +1,7 @@
+name: Runner Smoke
+on: { workflow_dispatch: {} }
+jobs:
+  ping:
+    runs-on: [self-hosted, juist-hosted]
+    steps:
+      - run: echo "Runner picked this up at $(date)"
