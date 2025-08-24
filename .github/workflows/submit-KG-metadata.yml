@@ -1,73 +1,53 @@
-name: Process Approved Issue
+name: Process Approved Issues
 
 on:
   issues:
     types: [labeled]
 
-permissions:
-  issues: read
-  contents: read
-
 jobs:
-  run-on-approved:
+  process:
     if: contains(join(github.event.issue.labels.*.name, ' '), 'approved')
-    runs-on: [self-hosted, juist-hosted]
-
-    concurrency:
-      group: issue-${{ github.event.issue.number }}
-      cancel-in-progress: false
+    runs-on: [self-hosted, linux, juist-hosted]
 
     steps:
-      - name: Check out workflow repo (optional, if you need code)
+      - name: Start
+        run: echo "🚀 Starting pipeline for issue #${{ github.event.issue.number }}"
+
+      - name: Check out repo
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install dependencies
         run: |
+          echo "==> Installing dependencies"
           python -m pip install --upgrade pip
           pip install pyyaml
+          echo "✅ Dependencies installed"
 
-      - name: Save issue body to file
-        id: save_body
+      - name: Save issue body
         run: |
+          echo "==> Writing issue body to file"
           printf "%s" "${{ github.event.issue.body }}" > issue_body.txt
+          ls -lh issue_body.txt
+          echo "✅ Done"
 
-      - name: Extract YAML from issue body
-        id: extract_yaml
+      - name: Extract YAML
         run: |
+          echo "==> Extracting YAML"
           python scripts/extract_yaml.py issue_body.txt payload.yaml
+          echo "YAML content:"
+          cat payload.yaml
+          echo "✅ YAML extracted"
 
-      - name: Validate YAML schema (optional but recommended)
+      - name: Run pipeline
         run: |
-          pip install voluptuous
-          python scripts/validate_yaml.py payload.yaml
-
-      - name: Run your business logic
-        env:
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          ISSUE_URL: ${{ github.event.issue.html_url }}
-        run: |
+          echo "==> Running pipeline script"
           python scripts/run_pipeline.py payload.yaml
+          echo "✅ Pipeline finished"
 
-      - name: (Optional) Upload outputs
-        uses: actions/upload-artifact@v4
-        with:
-          name: output-${{ github.event.issue.number }}
-          path: outputs/
-          if-no-files-found: ignore
-
-      - name: (Optional) Comment back on the issue
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const number = context.payload.issue.number;
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: number,
-              body: "✅ Processing finished for this approved submission."
-            });
+      - name: Done
+        run: echo "🎉 All steps completed successfully"
