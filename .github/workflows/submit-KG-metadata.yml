@@ -4,14 +4,20 @@ on:
   issues:
     types: [labeled]
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   process:
     if: contains(join(github.event.issue.labels.*.name, ' '), 'approved')
-    runs-on: [self-hosted, linux, juist-hosted]
+    runs-on: [self-hosted, juist-hosted]
 
     steps:
       - name: Start
-        run: echo "🚀 Starting pipeline for issue #${{ github.event.issue.number }}"
+        run: |
+          set -euo pipefail
+          printf '%s\n' '🚀 Starting pipeline for issue #${{ github.event.issue.number }}'
 
       - name: Check out repo
         uses: actions/checkout@v4
@@ -23,31 +29,35 @@ jobs:
 
       - name: Install dependencies
         run: |
-          echo "==> Installing dependencies"
+          set -euo pipefail
+          echo '==> Installing dependencies'
           python -m pip install --upgrade pip
           pip install pyyaml
-          echo "✅ Dependencies installed"
+          echo '✅ Dependencies installed'
 
       - name: Save issue body
         run: |
-          echo "==> Writing issue body to file"
-          printf "%s" "${{ github.event.issue.body }}" > issue_body.txt
+          set -euo pipefail
+          echo '==> Writing issue body to file'
+          printf '%s' '${{ github.event.issue.body }}' > issue_body.txt
           ls -lh issue_body.txt
-          echo "✅ Done"
+          echo '✅ Done'
 
       - name: Extract YAML
         run: |
-          echo "==> Extracting YAML"
+          set -euo pipefail
+          echo '==> Extracting YAML'
           python scripts/extract_yaml.py issue_body.txt payload.yaml
-          echo "YAML content:"
+          echo 'YAML content:'
           cat payload.yaml
-          echo "✅ YAML extracted"
+          echo '✅ YAML extracted'
 
       - name: Run pipeline
         run: |
-          echo "==> Running pipeline script"
+          set -euo pipefail
+          echo '==> Running pipeline script'
           python scripts/run_pipeline.py payload.yaml
-          echo "✅ Pipeline finished"
+          echo '✅ Pipeline finished'
 
       - name: Done
-        run: echo "🎉 All steps completed successfully"
+        run: echo '🎉 All steps completed successfully'
