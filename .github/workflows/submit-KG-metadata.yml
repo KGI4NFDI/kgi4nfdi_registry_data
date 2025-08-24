@@ -14,11 +14,6 @@ jobs:
     runs-on: [self-hosted, juist-hosted]
 
     steps:
-      - name: Start
-        run: |
-          set -euo pipefail
-          printf '%s\n' '🚀 Starting pipeline for issue #${{ github.event.issue.number }}'
-
       - name: Check out repo
         uses: actions/checkout@v4
 
