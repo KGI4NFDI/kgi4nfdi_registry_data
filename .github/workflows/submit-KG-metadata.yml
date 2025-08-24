@@ -7,7 +7,7 @@ on:
 jobs:
   run-python-script:
     if: github.event.label.name == 'approved'
-    runs-on: juist-hosted
+    runs-on: [self-hosted, juist-hosted]
 
     steps:
       - name: Checkout repo
