@@ -30,13 +30,17 @@ jobs:
           pip install pyyaml pandas rdflib argparse
           echo '✅ Dependencies installed'
 
-      - name: Save issue body
-        run: |
-          set -euo pipefail
-          echo '==> Writing issue body to file'
-          printf '%s' "${{ github.event.issue.body }}" > issue_body.txt
-          ls -lh issue_body.txt
-          echo '✅ Done'
+      - name: Save issue body (API)
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const { data: issue } = await github.rest.issues.get({ owner, repo, issue_number });
+            const fs = require('fs');
+            fs.writeFileSync('issue_body.txt', issue.body ?? '', { encoding: 'utf8' });
+            core.info(`Wrote ${ (issue.body ?? '').length } bytes to issue_body.txt`);
+
 
       - name: Extract YAML
         run: |
