@@ -14,6 +14,7 @@ To add new KG resources to the KGI registry:
 3. If there is no Wikidata item for the value you require, please add it to Wikidata first, then mention its QID.
 4. Please USE bullet points as in the template.
 5. Please DON'T remove the fenced YAML block
+6. If some non-essential values are missing, remove the brackets placeholders
 
 ```yaml
 Name of the KG*: [example: NFDI4Culture KG]
@@ -34,7 +35,8 @@ KG URL: [add URL link]
 URLs for SPARQL endpoint*: [add URL link]
 URL for (REST) API: [add URL link]
 URL for dump files: [add URL link]
-Standard ontology(ies): [add URL link to ontology]
+Standard ontology(ies):
+- [add URL links to ontologies]
 ```
 Note to admin: [enter free text]
 
