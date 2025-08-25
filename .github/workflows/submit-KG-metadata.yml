@@ -55,7 +55,7 @@ jobs:
         run: |
           set -euo pipefail
           echo '==> Running pipeline script'
-          python scripts/run_pipeline.py payload.yaml
+          python scripts/convert_yaml_to_rdf.py --yml_in payload.yaml --rdf_in ls -t /home/ubuntu/data/*.ttl | head -n 1 --out_dir /home/ubuntu/data/
           echo '✅ Pipeline finished'
 
       - name: Done
