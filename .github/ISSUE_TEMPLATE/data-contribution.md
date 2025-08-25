@@ -12,7 +12,7 @@ To add new KG resources to the KGI registry:
 1. Please fill out the following metadata attributes, delete any instructional or example text in [] brackets,
 2. add a note to the registry admins in the note field below if necessary. Most fields require text, URL or Wikidata item ID.
 3. If there is no Wikidata item for the value you require, please add it to Wikidata first, then mention its QID.
-4. Please USE bullet points as in the template.
+4. Please USE the spaced bullet points as in the template.
 5. Please DON'T remove the fenced YAML block
 6. If some non-essential values are missing, remove the brackets placeholders
 
@@ -27,7 +27,7 @@ Contact point*:
 - [example: Wikidata item contains information about a person or an organization, eg. Q30078997]
 License(s)*:
 - [example: add Wikidata item ID, eg. Q20007257 for CC-BY]
-Subject(s):-
+Subject(s):
 - [example: add Wikidata item ID, eg Q50637 for art history]
 KG software:
 - [example: add Wikidata item ID for the KG engine software, eg. Q118980507]
