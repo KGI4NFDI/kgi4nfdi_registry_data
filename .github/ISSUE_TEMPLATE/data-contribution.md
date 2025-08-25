@@ -8,7 +8,12 @@ assignees: elhossary, lozanaross
 
 ---
 
-[To add new KG resources to the KGI registry, please fill out the following metadata attributes, delete any instructional or example text in [] brackets, and add a note to the registry admins in the note field below if necessary. Most fields require text, URL or Wikidata item ID. If there is no Wikidata item for the value you require, please add it to Wikidata first, then mention its QID. Please USE bullet points as in the template]
+To add new KG resources to the KGI registry:
+1. Please fill out the following metadata attributes, delete any instructional or example text in [] brackets,
+2. add a note to the registry admins in the note field below if necessary. Most fields require text, URL or Wikidata item ID.
+3. If there is no Wikidata item for the value you require, please add it to Wikidata first, then mention its QID.
+4. Please USE bullet points as in the template.
+5. Please DON'T remove the fenced YAML block
 
 ```yaml
 Name of the KG*: [example: NFDI4Culture KG]
@@ -29,7 +34,6 @@ KG URL: [add URL link]
 URLs for SPARQL endpoint*: [add URL link]
 URL for (REST) API: [add URL link]
 URL for dump files: [add URL link]
-KG version: [example: v1.0]
 Standard ontology(ies): [add URL link to ontology]
 ```
 Note to admin: [enter free text]
