@@ -123,8 +123,8 @@ def main():
                 g.add((entity_iri, DCTERMS.creator, WIKIDATA[creator]))
             else:
                 g.add((entity_iri, DCTERMS.creator, Literal(creator)))
-
-    out_path = os.path.abspath(f"{args.out_dir}/{datetime.now().strftime("%Y-%m-%d-%H-%M-%S")}_dataset.ttl")
+    timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+    out_path = os.path.abspath(f"{args.out_dir}/{timestamp}_dataset.ttl")
     g.serialize(destination=out_path)
 
 if __name__ == "__main__":
