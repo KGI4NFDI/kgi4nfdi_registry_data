@@ -32,7 +32,8 @@ Subject(s):
 KG software:
 - [example: add Wikidata item ID for the KG engine software, eg. Q118980507]
 KG URL: [add URL link]
-URLs for SPARQL endpoint*: [add URL link]
+URLs for SPARQL endpoint*:
+- [add URL link]
 URL for (REST) API: [add URL link]
 URL for dump files: [add URL link]
 Standard ontology(ies):
