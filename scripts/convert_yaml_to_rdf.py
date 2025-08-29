@@ -44,7 +44,7 @@ def main():
         if match:
             ids.append(int(match.group(1)))
 
-    x = max(ids) if ids else None
+    x = max(ids) if ids else 0
 
     yml_data = parse_yaml(os.path.abspath(args.yml_in))
 
