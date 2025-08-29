@@ -44,7 +44,7 @@ def main():
         if match:
             ids.append(int(match.group(1)))
 
-    x = max(ids) if ids else None
+    x = max(ids) if ids else 0
 
     yml_data = parse_yaml(os.path.abspath(args.yml_in))
 
@@ -72,9 +72,12 @@ def main():
                 g.add((entity_iri, DCTERMS.publisher, WIKIDATA[publisher]))
 
     ontology_urls = yml_data['Standard ontology(ies)']
-    for ontology in ontology_urls:
-        ontology = ontology.strip()
-        g.add((entity_iri, DCTERMS.conformsTo, Literal(ontology)))
+    if ontology_urls:
+        for ontology in ontology_urls:
+            if not ontology:
+                continue
+            ontology = ontology.strip()
+            g.add((entity_iri, DCTERMS.conformsTo, Literal(ontology)))
 
     sparql_urls = yml_data['URLs for SPARQL endpoint*']
     if sparql_urls:
@@ -82,6 +85,8 @@ def main():
         child_entity_iri = URIRef(KGREG[f"KGR{x}"])
         g.add((child_entity_iri, RDF.type, DCAT.DataService))
         for url in sparql_urls:
+            if not url:
+                continue
             url = url.strip()
             g.add((child_entity_iri, DCAT.endpointURL, Literal(url)))
             g.add((child_entity_iri, DCAT.servesDataset, entity_iri))
@@ -96,11 +101,15 @@ def main():
         if api_urls:
             api_urls = api_urls.split(",")
             for url in api_urls:
+                if not url:
+                    continue
                 url = url.strip()
                 g.add((child_entity_iri, DCAT.accessURL, Literal(url)))
         if download_urls:
             download_urls = download_urls.split(",")
             for url in download_urls:
+                if not url:
+                    continue
                 url = url.strip()
                 g.add((child_entity_iri, DCAT.downloadURL, Literal(url)))
         g.add((entity_iri, DCAT.distribution, child_entity_iri))
@@ -108,6 +117,8 @@ def main():
     contacts = yml_data['Contact point*']
     if contacts:
         for contact in contacts:
+            if not contact:
+                continue
             contact = contact.strip()
             if contact.startswith("Q"):
                 g.add((entity_iri, DCAT.contactPoint, WIKIDATA[contact]))
@@ -118,6 +129,8 @@ def main():
     if creators:
 
         for creator in creators:
+            if not creator:
+                continue
             creator = creator.strip()
             if creator.startswith("Q"):
                 g.add((entity_iri, DCTERMS.creator, WIKIDATA[creator]))
