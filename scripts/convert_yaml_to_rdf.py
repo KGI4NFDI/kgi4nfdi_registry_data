@@ -72,11 +72,12 @@ def main():
                 g.add((entity_iri, DCTERMS.publisher, WIKIDATA[publisher]))
 
     ontology_urls = yml_data['Standard ontology(ies)']
-    for ontology in ontology_urls:
-        if not ontology:
-            continue
-        ontology = ontology.strip()
-        g.add((entity_iri, DCTERMS.conformsTo, Literal(ontology)))
+    if ontology_urls:
+        for ontology in ontology_urls:
+            if not ontology:
+                continue
+            ontology = ontology.strip()
+            g.add((entity_iri, DCTERMS.conformsTo, Literal(ontology)))
 
     sparql_urls = yml_data['URLs for SPARQL endpoint*']
     if sparql_urls:
