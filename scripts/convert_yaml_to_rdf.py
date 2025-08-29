@@ -74,8 +74,6 @@ def main():
     ontology_urls = yml_data['Standard ontology(ies)']
     if ontology_urls:
         for ontology in ontology_urls:
-            if not ontology:
-                continue
             ontology = ontology.strip()
             g.add((entity_iri, DCTERMS.conformsTo, Literal(ontology)))
 
